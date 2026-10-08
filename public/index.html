@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BlockForge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Nunito:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=9">
+</head>
+<body>
+<section id="login">
+  <nav class="nav">
+    <b class="logo">BlockForge</b>
+    <div class="links"><button type="button" data-go="login">Sign in</button><button type="button" class="primary" data-go="register">Create account</button></div>
+  </nav>
+
+  <div class="hero">
+    <div>
+      <p class="tag">// visual programming, powered by AI</p>
+      <h2>Coding made easy.<br><em>Visualise it with blocks.</em></h2>
+      <p class="sub">Describe a program, or type your own code. BlockForge snaps it into colourful blocks you can drag around, and turns blocks back into real Python, Java, C++ or JavaScript.</p>
+      <div class="demo" aria-hidden="true">
+        <div class="stack">
+          <div class="blk b-var">set <i>name</i> to <em>"Ada"</em></div>
+          <div class="blk b-loop">repeat <em>3</em> times
+            <div class="blk b-print">print <em>"Hello "</em> + <i>name</i></div>
+          </div>
+        </div>
+        <div class="swap">&#8646;</div>
+        <pre class="term"><span class="dim"># python</span>
+name = "Ada"
+for _ in range(3):
+    print("Hello " + name)<span class="cur">_</span></pre>
+      </div>
+    </div>
+
+    <div class="card" id="authCard">
+      <h1>BlockForge</h1>
+      <div class="tabs" role="group" aria-label="Account">
+        <button data-mode="login" class="on">Sign in</button><button data-mode="register">Create account</button>
+      </div>
+      <input id="u" placeholder="Username" autocomplete="username">
+      <div class="pw"><input id="p" type="password" placeholder="Password" autocomplete="current-password"><button type="button" id="eye" aria-label="Show password">Show</button></div>
+      <button id="loginBtn" class="primary">Sign in</button>
+      <p id="loginErr" class="err"></p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <h3 class="sec">Why BlockForge</h3>
+    <div class="feats">
+      <div class="feat"><b>Code &#8646; Blocks</b><span>Edit the code and the blocks follow. Drag a block and the code follows.</span></div>
+      <div class="feat"><b>4 languages</b><span>Python, Java, C++ and JavaScript from the same set of blocks.</span></div>
+      <div class="feat"><b>Ask the AI</b><span>Type "add two numbers" and watch a finished block program appear.</span></div>
+      <div class="feat"><b>Run it</b><span>Press Run and see the output in a built-in terminal.</span></div>
+    </div>
+
+    <h3 class="sec">How it works</h3>
+    <ol class="steps">
+      <li><b>Describe</b><span>Say what you want, or write some code.</span></li>
+      <li><b>See blocks</b><span>Your program snaps into blocks, neatly arranged.</span></li>
+      <li><b>Tweak &amp; run</b><span>Change anything, switch language, press Run.</span></li>
+    </ol>
+  </div>
+  <footer class="lfoot">BlockForge &middot; learn to code by seeing it</footer>
+</section>
+
+<div id="app" hidden>
+  <header>
+    <b class="logo">BlockForge</b>
+    <div class="seg" role="group" aria-label="Language">
+      <button data-lang="python" class="on">Python</button><button data-lang="java">Java</button><button data-lang="cpp">C++</button><button data-lang="js">JavaScript</button>
+    </div>
+    <input id="prompt" placeholder="Describe a program, e.g. add two numbers">
+    <button id="gen" class="primary">Generate</button>
+    <button id="tidy">Arrange</button>
+    <button id="logout" title="Sign out">Sign out</button>
+  </header>
+  <main>
+    <div id="blocklyDiv"></div>
+    <aside>
+      <label for="code">Code <span class="dim">(edit it and the blocks follow)</span></label>
+      <textarea id="code" spellcheck="false"></textarea>
+      <div class="io">
+        <div class="iobar">
+          <div class="iotabs" role="group" aria-label="Input or output">
+            <button data-pane="in" class="on">Input</button><button data-pane="out">Output</button>
+          </div>
+          <button id="run" class="primary">Run</button>
+        </div>
+        <textarea id="stdin" spellcheck="false" placeholder="One line per input block"></textarea>
+        <pre id="out" hidden></pre>
+      </div>
+    </aside>
+  </main>
+  <footer><span id="status">Ready</span></footer>
+</div>
+
+<script src="https://unpkg.com/blockly/blockly.min.js"></script>
+<script src="app.js?v=9"></script>
+<script>
+document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => {
+  document.querySelector('.tabs button[data-mode="' + b.dataset.go + '"]').click();
+  document.getElementById("authCard").scrollIntoView({ behavior: "smooth", block: "center" });
+  document.getElementById("u").focus({ preventScroll: true });
+});
+</script>
+</body>
+</html>

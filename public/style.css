@@ -1,0 +1,121 @@
+/* BlockForge: hackathon / terminal theme. Colour is kept for the Blockly workspace only. */
+:root{
+  --bg:#0e1219;--panel:#141a23;--panel2:#19212c;--line:#242e3c;
+  --text:#c5d0de;--dim:#76849a;--accent:#7aa2f7;--accent-ink:#0b1220;--bad:#f7768e;--out:#8ccfe0;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font:14px/1.5 "JetBrains Mono",Consolas,monospace}
+button,input,textarea{font:inherit;color:inherit;background:var(--panel2);border:1px solid var(--line);border-radius:4px;padding:7px 12px}
+button{cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .1s}
+button:hover{border-color:var(--accent);box-shadow:0 0 0 1px #7aa2f733}
+button:active{transform:translateY(1px)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+[hidden]{display:none!important}
+.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+.primary:hover{filter:brightness(1.08)}
+.dim{color:var(--dim);font-weight:400}
+.err{color:var(--bad);min-height:1.4em;margin:0}
+input{caret-color:var(--accent)}
+input::placeholder{color:var(--dim)}
+input:-webkit-autofill{-webkit-text-fill-color:var(--text);box-shadow:0 0 0 100px var(--panel2) inset;caret-color:var(--text)}
+
+/* ---------- login ---------- */
+#login{position:fixed;inset:0;overflow-y:auto;z-index:5;background-color:var(--bg);background-image:linear-gradient(#7aa2f708 1px,transparent 1px),linear-gradient(90deg,#7aa2f708 1px,transparent 1px);background-size:32px 32px}
+#login[hidden],#app[hidden]{display:none}
+.card{width:100%;max-width:340px;justify-self:end;display:flex;flex-direction:column;gap:10px;padding:28px;border:1px solid var(--line);border-radius:6px;background:var(--panel);
+  box-shadow:0 10px 40px #000a,0 0 0 1px #7aa2f722}
+.card h1{margin:0;font-size:26px;color:var(--accent);letter-spacing:.5px}
+.card h1::before{content:"> ";color:var(--dim)}
+.card h1::after{content:"_";animation:blink 1s steps(1) infinite}
+.card p{margin:0}
+.pw{display:flex;gap:6px}.pw input{flex:1;min-width:0}.pw button{padding:7px 10px}
+
+/* ---------- segmented controls / tabs (single accent colour) ---------- */
+.seg,.tabs,.iotabs{display:flex}
+.seg button,.tabs button,.iotabs button{border-radius:0}
+.seg button:first-child,.tabs button:first-child,.iotabs button:first-child{border-radius:4px 0 0 4px}
+.seg button:last-child,.tabs button:last-child,.iotabs button:last-child{border-radius:0 4px 4px 0}
+.tabs button{flex:1}
+.iotabs button{padding:4px 14px}
+.seg .on,.tabs .on,.iotabs .on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+
+/* ---------- app shell ---------- */
+#app{display:flex;flex-direction:column;height:100%}
+header{display:flex;gap:10px;align-items:center;padding:10px 14px;background:var(--panel);border-bottom:1px solid var(--accent);box-shadow:0 1px 12px #0006}
+.logo{font-size:19px;color:var(--accent);margin-right:6px;letter-spacing:.5px}
+.logo::before{content:"> ";color:var(--dim)}
+#prompt{flex:1;min-width:120px}
+main{flex:1;display:flex;min-height:0}
+footer{display:flex;justify-content:space-between;align-items:center;padding:4px 14px;border-top:1px solid var(--line);background:var(--panel);color:var(--dim);font-size:12px}
+footer button{padding:2px 10px}
+#status::before{content:"● ";color:var(--accent)}
+
+/* ---------- blockly area: stays colourful ---------- */
+#blocklyDiv{flex:1;min-width:0;background-color:var(--bg);
+  background-image:radial-gradient(circle at 20px 20px,#4C97FF26 3px,transparent 4px),radial-gradient(circle at 75px 55px,#FFAB1926 3px,transparent 4px),radial-gradient(circle at 45px 95px,#CF63CF26 3px,transparent 4px);
+  background-size:110px 110px}
+.blocklyToolboxDiv{border-right:1px solid var(--line);background-image:repeating-linear-gradient(45deg,#ffffff07 0 6px,transparent 6px 12px)!important}
+.blocklyTreeRow{border-radius:4px;margin:2px 4px}
+
+/* ---------- code + terminal panel: hacker style ---------- */
+aside{width:max(380px,40vw);display:flex;flex-direction:column;gap:6px;padding:12px;border-left:1px solid var(--accent);background:var(--panel);box-shadow:-6px 0 24px #0006}
+aside label{color:var(--dim)}
+aside label::before{content:"$ cat ";color:var(--accent)}
+
+#code,#stdin,#out{background-color:#0a0e14;border:1px solid var(--line);border-radius:4px;font-family:"JetBrains Mono",Consolas,monospace}
+#code{flex:7 1 0;min-height:0;resize:none;white-space:pre;tab-size:4;color:#d3dbe8;caret-color:var(--accent);
+  background-image:repeating-linear-gradient(transparent 0 20px,#ffffff08 20px 21px);background-attachment:local}
+#code:focus,#stdin:focus{border-color:var(--accent);box-shadow:0 0 0 1px #7aa2f744}
+.io{flex:3 1 0;min-height:0;display:flex;flex-direction:column;gap:6px}
+.iobar{display:flex;justify-content:space-between;align-items:center}
+.io #stdin,.io #out{flex:1;min-height:0}
+#stdin{resize:none;color:var(--out);caret-color:var(--accent)}
+#out{margin:0;padding:10px;overflow:auto;white-space:pre-wrap;color:var(--out);text-shadow:none;
+  background-image:repeating-linear-gradient(0deg,#7aa2f708 0 1px,transparent 1px 3px)}
+#out:not(:empty)::before{content:"$ run\A";color:var(--dim);text-shadow:none}
+#out.bad{color:var(--bad)}
+
+/* ---------- dialog ---------- */
+dialog{background:var(--panel);color:var(--text);border:1px solid var(--accent);border-radius:6px;padding:22px;max-width:380px}
+dialog::backdrop{background:#000a}
+.row{display:flex;gap:8px;justify-content:flex-end}
+
+@keyframes blink{50%{opacity:0}}
+@media(max-width:800px){main{flex-direction:column}aside{width:auto;height:45%}header{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- landing page (login screen) ---------- */
+.nav{display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto;padding:18px 24px}
+.nav .logo{margin:0;font-size:21px}
+.links{display:flex;gap:8px}
+.hero{max-width:1100px;margin:0 auto;padding:24px 24px 56px;display:grid;grid-template-columns:1.25fr .75fr;gap:44px;align-items:center}
+.tag{margin:0 0 10px;color:var(--accent);font-size:13px}
+.hero h2{margin:0 0 16px;font-size:clamp(30px,4.6vw,54px);line-height:1.08;letter-spacing:-.5px}
+.hero h2 em{font-style:normal;color:var(--accent);text-shadow:none}
+.sub{margin:0 0 26px;max-width:540px;color:var(--dim);font-size:15px}
+.demo{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.stack{display:flex;flex-direction:column;gap:4px;min-width:210px}
+.blk{padding:9px 14px;border-radius:12px;color:#fff;font-weight:600;font-size:13px;box-shadow:0 3px 0 #0006}
+.blk i{font-style:normal;background:#0003;border-radius:8px;padding:1px 8px}
+.blk em{font-style:normal;background:#fffe;color:#222;border-radius:8px;padding:1px 8px}
+.b-var{background:#FF8C1A}.b-loop{background:#FFAB19;padding-bottom:10px}.b-print{background:#9966FF;margin:6px 0 0 18px}
+.swap{font-size:26px;color:var(--accent)}
+.term{margin:0;padding:12px 16px;background:#0a0e14;border:1px solid var(--line);border-radius:6px;color:var(--out);font-size:13px;line-height:1.55}
+.cur{animation:blink 1s steps(1) infinite}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px 40px}
+.sec{margin:34px 0 14px;font-size:14px;color:var(--dim);font-weight:400}
+.sec::before{content:"$ ";color:var(--accent)}
+.feats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.feat,.steps li{display:flex;flex-direction:column;gap:6px;padding:16px;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.feat:hover{border-color:var(--accent)}
+.feat b,.steps b{color:var(--accent)}
+.feat span,.steps span{color:var(--dim);font-size:13px}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;counter-reset:s}
+.steps li::before{counter-increment:s;content:"0" counter(s);color:var(--dim);font-size:12px}
+.lfoot{padding:18px;text-align:center;color:var(--dim);font-size:12px;border-top:1px solid var(--line)}
+@media(max-width:860px){.hero{grid-template-columns:1fr}.card{justify-self:stretch;max-width:none}.feats{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}}
+
+/* sign-out button in the top bar */
+#logout{margin-left:4px;border-color:var(--line);color:var(--dim)}
+#logout:hover{color:var(--bad);border-color:var(--bad)}
